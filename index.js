@@ -19,6 +19,9 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 io.on("connection", (socket) => {
   console.log("Connection Received");
+  socket.on("usertyping", (msg) => {
+    console.log(msg + " is typing....");
+  });
 });
 
 app.use(function (req, res, next) {
