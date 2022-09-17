@@ -20,7 +20,7 @@ var usersTyping = [];
 io.on("connection", (socket) => {
   console.log("Connection Received");
   socket.on("usertyping", (msg) => {
-    usersTyping.push(msg);
+    usersTyping.includes(msg) === false ? usersTyping.push(msg) : "";
     io.emit("isTyping", usersTyping);
   });
 });
