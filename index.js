@@ -34,6 +34,11 @@ io.on("connection", (socket) => {
   });
 });
 
+setInterval(() => {
+  usersTyping = [];
+  io.emit("isTyping", usersTyping);
+});
+
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
