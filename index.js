@@ -23,6 +23,15 @@ io.on("connection", (socket) => {
     usersTyping.includes(msg) === false ? usersTyping.push(msg) : "";
     io.emit("isTyping", usersTyping);
   });
+  socket.on("removeTyping", (msg) => {
+    if (usersTyping.includes(msg) === true) {
+      const index = usersTyping.indexOf(msg);
+      if (index > -1) {
+        usersTyping.splice(index, 1);
+        io.emit("isTyping", usersTyping);
+      }
+    }
+  });
 });
 
 app.use(function (req, res, next) {
