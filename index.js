@@ -16,11 +16,12 @@ const io = require("socket.io")(server, {
 var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
+var usersTyping = [];
 io.on("connection", (socket) => {
   console.log("Connection Received");
   socket.on("usertyping", (msg) => {
-    console.log(msg + " is typing....");
+    usersTyping.push(msg);
+    io.emit("isTyping", usersTyping);
   });
 });
 
