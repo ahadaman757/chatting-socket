@@ -5,15 +5,7 @@ const http = require("http");
 const server = http.Server(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: [
-      `https://192.163.206.200`,
-      `http://localhost:3000`,
-      `https://192.163.206.200:3000`,
-      `https://deluxehouses.ae`,
-      `http://deluxehouses.ae`,
-      `wss://chat-reply.com:3000/ws`,
-      `wss://chat-reply.com:3000/ws`,
-    ],
+    origin: ["https://wavefm.live"],
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     transports: ["websocket"],
