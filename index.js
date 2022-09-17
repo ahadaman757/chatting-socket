@@ -37,7 +37,7 @@ io.on("connection", (socket) => {
 setInterval(() => {
   usersTyping = [];
   io.emit("isTyping", usersTyping);
-});
+}, 10000);
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
