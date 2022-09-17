@@ -1,11 +1,33 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
-
+const http = require("http");
+const server = http.Server(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: [
+      `https://192.163.206.200`,
+      `http://localhost:3000`,
+      `https://192.163.206.200:3000`,
+      `https://deluxehouses.ae`,
+      `http://deluxehouses.ae`,
+      `wss://chat-reply.com:3000/ws`,
+      `wss://chat-reply.com:3000/ws`,
+    ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    transports: ["websocket"],
+    credentials: true,
+  },
+});
 // create application/json parser
 var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+io.on("connection", (socket) => {
+  console.log("Connection Received");
+});
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
@@ -30,8 +52,7 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-const http = require("http");
-const server = http.Server(app);
+
 app.get("/", jsonParser, (req, res) => {
   res.send("Yo");
   //   res.json("WOW");
